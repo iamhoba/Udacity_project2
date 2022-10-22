@@ -15,9 +15,9 @@
 #include "../../MCAL/Interrupt_Library/interrupt.h"
 
 /*All driver functions prototypes*/
-void BUTTON_init(uint8_t buttonPort, uint8_t buttonPin);					//initialize button
-void BUTTON_INT_init(uint8_t buttonPort, uint8_t buttonPin);				//initialize button interrupt
-void BUTTON_read(uint8_t buttonPort, uint8_t buttonPin, uint8_t *value);	//read button state
+uint8_t BUTTON_init(uint8_t buttonPort, uint8_t buttonPin);					//initialize button
+uint8_t BUTTON_INT_init(uint8_t buttonPort, uint8_t buttonPin);				//initialize button interrupt
+uint8_t BUTTON_read(uint8_t buttonPort, uint8_t buttonPin, uint8_t *value);	//read button state
 
 /*All button macros*/
 #define BUTTON_1_PORT PORT_D

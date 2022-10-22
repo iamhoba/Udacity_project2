@@ -9,7 +9,7 @@
 
 
 /*Enable external interrupts*/
-void EXT_INT_init(uint8_t intNumber){
+uint8_t EXT_INT_init(uint8_t intNumber){
 	switch (intNumber){
 		case INT0:
 		MCUCR |= (1<<ISC00) | (1<<ISC01);		//choose external interrupt 0 sense rising edge
@@ -23,7 +23,10 @@ void EXT_INT_init(uint8_t intNumber){
 		MCUCSR |= (1<<ISC2);					//choose external interrupt 2 sense rising edge
 		GICR |= (1<<INT2);						//Enable external interrupt 2
 		break;		
+		default:
+		return ERROR;
 	}
+	return OK;
 }
 
 
@@ -34,7 +37,7 @@ void INT_init(void){
 
 
 /*Enable timer interrupts*/
-void TIMER_INT_init(uint8_t timerNumber){
+uint8_t TIMER_INT_init(uint8_t timerNumber){
 	switch (timerNumber){
 		case TIMER_0:
 		TIMSK |= (1<<OCIE0);					//Enable Timer 0 interrupt
@@ -46,5 +49,8 @@ void TIMER_INT_init(uint8_t timerNumber){
 		case TIMER_2:
 		TIMSK |= (1<<OCIE2);					//Enable Timer 2 interrupt
 		break;
+		default:
+		return ERROR;
 	}
+	return OK;
 }

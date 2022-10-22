@@ -7,7 +7,7 @@
 
 #include "dio.h"
 
-void DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction){
+uint8_t DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction){
 	switch(portNumber)
 	{
 		case PORT_A:
@@ -20,7 +20,7 @@ void DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction){
 				DDRA |= (1<<pinNumber); //output
 			}
 			else {
-				//error handling
+				return ERROR;
 			}
 		break;
 		case PORT_B:
@@ -33,7 +33,7 @@ void DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction){
 			DDRB |= (1<<pinNumber); //output
 		}
 		else {
-			//error handling
+			return ERROR;
 		}
 		break;
 		case PORT_C:
@@ -46,7 +46,7 @@ void DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction){
 			DDRC |= (1<<pinNumber); //output
 		}
 		else {
-			//error handling
+			return ERROR;
 		}
 		break;
 		case PORT_D:
@@ -59,14 +59,16 @@ void DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction){
 			DDRD |= (1<<pinNumber); //output
 		}
 		else {
-			//error handling
+			return ERROR;
 		}
 		break;
-		
+		default:
+		return ERROR;
 	}
+	return OK;
 }
 
-void DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value){
+uint8_t DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value){
 	switch(portNumber)
 	{
 		case PORT_A:
@@ -79,7 +81,7 @@ void DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value){
 			PORTA |= (1<<pinNumber); //write 1
 		}
 		else {
-			//error handling
+			return ERROR;
 		}
 		break;
 		case PORT_B:
@@ -92,7 +94,7 @@ void DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value){
 			PORTB |= (1<<pinNumber); //write 1
 		}
 		else {
-			//error handling
+			return ERROR;
 		}
 		break;
 		case PORT_C:
@@ -105,7 +107,7 @@ void DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value){
 			PORTC |= (1<<pinNumber); //write 1
 		}
 		else {
-			//error handling
+			return ERROR;
 		}
 		break;
 		case PORT_D:
@@ -118,15 +120,22 @@ void DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value){
 			PORTD |= (1<<pinNumber); //write 1
 		}
 		else {
-			//error handling
+			return ERROR;
 		}
 		break;
+		default:
+		return ERROR;
 		
 	}
+	return OK;
 }
 
 
-void DIO_read(uint8_t portNumber, uint8_t pinNumber, uint8_t *value){
+uint8_t DIO_read(uint8_t portNumber, uint8_t pinNumber, uint8_t *value){
+	if (pinNumber > 7)
+	{
+		return ERROR;
+	}
 	switch(portNumber)
 	{
 		case PORT_A:
@@ -141,6 +150,8 @@ void DIO_read(uint8_t portNumber, uint8_t pinNumber, uint8_t *value){
 		case PORT_D:
 		*value = (PIND & (1<<pinNumber))>>pinNumber;
 		break;
-		
+		default:
+		return ERROR;
 	}
+	return OK;
 }

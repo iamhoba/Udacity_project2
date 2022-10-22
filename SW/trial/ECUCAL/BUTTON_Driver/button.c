@@ -8,17 +8,17 @@
 #include "button.h"
 
 /*Initialize button*/
-void BUTTON_init(uint8_t buttonPort, uint8_t buttonPin){
-	DIO_init(buttonPort,buttonPin,IN);
+uint8_t BUTTON_init(uint8_t buttonPort, uint8_t buttonPin){
+	return DIO_init(buttonPort,buttonPin,IN);
 }
 
 /*read button state*/
-void BUTTON_read(uint8_t buttonPort, uint8_t buttonPin, uint8_t *value){
-	DIO_read(buttonPort,buttonPin, value);
+uint8_t BUTTON_read(uint8_t buttonPort, uint8_t buttonPin, uint8_t *value){
+	return DIO_read(buttonPort,buttonPin, value);
 }
 
 /*initialize button external interrupt*/
-void BUTTON_INT_init(uint8_t buttonPort, uint8_t buttonPin){
-		EXT_INT_init(INT0);			//enable external interrupt
+uint8_t BUTTON_INT_init(uint8_t buttonPort, uint8_t buttonPin){
 		INT_init();					//enable global interrupts
+		return EXT_INT_init(INT0);	//enable external interrupt
 }

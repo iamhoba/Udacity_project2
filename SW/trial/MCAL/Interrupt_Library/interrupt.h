@@ -30,8 +30,8 @@
 void INT_VECT(void)
 
 /*All driver function prototypes*/
-void EXT_INT_init(uint8_t intNumber);				//enable external interrupts
-void TIMER_INT_init(uint8_t timerNumber);			//enable timer interrupts
+uint8_t EXT_INT_init(uint8_t intNumber);				//enable external interrupts
+uint8_t TIMER_INT_init(uint8_t timerNumber);			//enable timer interrupts
 void INT_init(void);								//enable global interrupts
 
 /*External interrupts macros*/

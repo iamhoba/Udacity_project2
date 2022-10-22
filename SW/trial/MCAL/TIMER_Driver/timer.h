@@ -14,11 +14,11 @@
 #include "../../Utilities/types.h"
 
 /*All driver function prototypes*/
-void TIMER_init(uint8_t timerNumber, uint8_t timerMode); //initialize of timer
-void TIMER_start(uint8_t timerNumber, uint32_t prescalar); //start timer
-void TIMER_stop(uint8_t timerNumber); //stop timer
-void TIMER_set_value( uint8_t timerNumber, uint8_t initValue); //set timer value
-void TIMER_delay( uint8_t timerNumber, uint8_t overFlows); //set timer value
+uint8_t TIMER_init(uint8_t timerNumber, uint8_t timerMode); //initialize of timer
+uint8_t TIMER_start(uint8_t timerNumber, uint32_t prescalar); //start timer
+uint8_t TIMER_stop(uint8_t timerNumber); //stop timer
+uint8_t TIMER_set_value( uint8_t timerNumber, uint8_t initValue); //set timer value
+uint8_t TIMER_delay( uint8_t timerNumber, uint8_t overFlows); //set timer value
 
 /*Timers macros*/
 #define TIMER_0 0

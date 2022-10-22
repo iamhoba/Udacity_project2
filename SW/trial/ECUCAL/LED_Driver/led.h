@@ -33,18 +33,24 @@
 #define LED_6_PORT PORT_B
 #define LED_6_PIN PIN_2
 
+#define LED_INIT_ERROR_PORT PORT_D
+#define LED_INIT_ERROR_PIN PIN_7
+
+#define LED_RUN_ERROR_PORT PORT_C
+#define LED_RUN_ERROR_PIN PIN_0
+
 
 /*All driver function prototypes*/
-void LED_init(uint8_t ledPort, uint8_t ledPin);				//initialize LED
-void LED_on(uint8_t ledPort, uint8_t ledPin);				//Turn LED on
-void LED_off(uint8_t ledPort, uint8_t ledPin);				//Turn LED off
-void LED_toggle(uint8_t ledPort, uint8_t ledPin);			//Toggle LED
-void LED_blink(uint8_t ledPort, uint8_t ledPin);			//Blink LED
-void LED_TIMER_init(void);									//initialize LED timer
-void LED_TIMER_start(void);									//Start LED timer
-void LED_TIMER_INT_init(void);								//initialize LED interrupt
-void LED_TIMER_stop(void);									//Stop LED timer
-void LED_TIMER_delay(void);									//Busy delay function
+uint8_t LED_init(uint8_t ledPort, uint8_t ledPin);				//initialize LED
+uint8_t LED_on(uint8_t ledPort, uint8_t ledPin);				//Turn LED on
+uint8_t LED_off(uint8_t ledPort, uint8_t ledPin);				//Turn LED off
+uint8_t LED_toggle(uint8_t ledPort, uint8_t ledPin);			//Toggle LED
+uint8_t LED_blink(uint8_t ledPort, uint8_t ledPin);				//Blink LED
+uint8_t LED_TIMER_init(void);									//initialize LED timer
+uint8_t LED_TIMER_start(void);									//Start LED timer
+uint8_t LED_TIMER_INT_init(void);								//initialize LED interrupt
+uint8_t LED_TIMER_stop(void);									//Stop LED timer
+uint8_t LED_TIMER_delay(void);									//Busy delay function
 
 
 #endif /* LED_H_ */

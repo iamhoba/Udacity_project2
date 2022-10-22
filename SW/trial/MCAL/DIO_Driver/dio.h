@@ -39,9 +39,9 @@
 
 
 /*All driver function prototypes*/
-void DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction); //initialize dio direction
-void DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value); //write data to dio
-void DIO_read(uint8_t portNumber, uint8_t pinNumber, uint8_t *value); //read dio
+uint8_t DIO_init(uint8_t portNumber, uint8_t pinNumber,uint8_t direction); //initialize dio direction
+uint8_t DIO_write(uint8_t portNumber, uint8_t pinNumber, uint8_t value); //write data to dio
+uint8_t DIO_read(uint8_t portNumber, uint8_t pinNumber, uint8_t *value); //read dio
 
 
 

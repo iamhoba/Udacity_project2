@@ -7,7 +7,7 @@
 
 #include "timer.h"
 
-void TIMER_init(uint8_t timerNumber, uint8_t timerMode){
+uint8_t TIMER_init(uint8_t timerNumber, uint8_t timerMode){
 	switch (timerNumber)
 	{
 		case TIMER_0:
@@ -18,7 +18,7 @@ void TIMER_init(uint8_t timerNumber, uint8_t timerMode){
 			break;
 			case PWM_PHASE_CORRECT_MODE:	//pwm phase correct mode
 			TCCR0 = 0x00;					//stop timer
-			TCCR0 |= (1<<WGM00);			//set timer to pwm phase correct mode 
+			TCCR0 |= (1<<WGM00);			//set timer to pwm phase correct mode
 			break;
 			case CTC_MODE:					//ctc mode
 			TCCR0 = 0x00;					//stop timer
@@ -29,6 +29,8 @@ void TIMER_init(uint8_t timerNumber, uint8_t timerMode){
 			TCCR0 |= (1<<WGM00);			//set timer to fast pwm mode
 			TCCR0 |= (1<<WGM01);				
 			break;
+			default:
+			return ERROR;
 		}
 		break;
 		case TIMER_1:
@@ -58,6 +60,8 @@ void TIMER_init(uint8_t timerNumber, uint8_t timerMode){
 			TCCR1B |= (1<<WGM12);
 			TCCR1B |= (1<<WGM13);
 			break;
+			default:
+			return ERROR;
 		}
 		break;
 		case TIMER_2:
@@ -68,7 +72,7 @@ void TIMER_init(uint8_t timerNumber, uint8_t timerMode){
 			break;
 			case PWM_PHASE_CORRECT_MODE:	//pwm phase correct mode
 			TCCR2 = 0x00;					//stop timer
-			TCCR2 |= (1<<WGM20);			//set timer to pwm phase correct mode 
+			TCCR2 |= (1<<WGM20);			//set timer to pwm phase correct mode
 			break;
 			case CTC_MODE:					//ctc mode
 			TCCR2 = 0x00;					//stop timer
@@ -79,12 +83,17 @@ void TIMER_init(uint8_t timerNumber, uint8_t timerMode){
 			TCCR2 |= (1<<WGM20);			//set timer to fast pwm mode
 			TCCR2 |= (1<<WGM21);				
 			break;
+			default:
+			return ERROR;
 		}
 		break;
+		default:
+		return ERROR;
 	}
+	return OK;
 }
 
-void TIMER_stop(uint8_t timerNumber){
+uint8_t TIMER_stop(uint8_t timerNumber){
 	switch (timerNumber)
 	{
 		case TIMER_0:
@@ -97,10 +106,13 @@ void TIMER_stop(uint8_t timerNumber){
 		case TIMER_2:
 			TCCR2 = 0x00;			//Timer Stop
 		break;
+		default:
+		return ERROR;
 	}
+	return OK;
 }
 
-void TIMER_start(uint8_t timerNumber, uint32_t prescalar){
+uint8_t TIMER_start(uint8_t timerNumber, uint32_t prescalar){
 	switch (timerNumber)
 	{
 		case TIMER_0:
@@ -122,6 +134,8 @@ void TIMER_start(uint8_t timerNumber, uint32_t prescalar){
 			TCCR0 |= (1<<CS00);
 			TCCR0 |= (1<<CS02);
 			break;
+			default:
+			return ERROR;
 		}
 		break;
 		case TIMER_1:
@@ -143,6 +157,8 @@ void TIMER_start(uint8_t timerNumber, uint32_t prescalar){
 			TCCR1B |= (1<<CS10);
 			TCCR1B |= (1<<CS12);
 			break;
+			default:
+			return ERROR;
 		}
 		break;
 		case TIMER_2:
@@ -165,12 +181,17 @@ void TIMER_start(uint8_t timerNumber, uint32_t prescalar){
 			TCCR2 |= (1<<CS21);
 			TCCR2 |= (1<<CS22);
 			break;
+			default:
+			return ERROR;
 		}
 		break;
+		default:
+		return ERROR;
 	}
+	return OK;
 }
 
-void TIMER_set_value( uint8_t timerNumber, uint8_t initValue) {
+uint8_t TIMER_set_value( uint8_t timerNumber, uint8_t initValue) {
 	switch (timerNumber){
 		case TIMER_0:
 		TCNT0 = initValue;
@@ -182,11 +203,14 @@ void TIMER_set_value( uint8_t timerNumber, uint8_t initValue) {
 		case TIMER_2:
 		TCNT2 = initValue;
 		break;
+		default:
+		return ERROR;
 	}
+	return OK;
 }
 
 
-void TIMER_delay( uint8_t timerNumber, uint8_t overFlows){
+uint8_t TIMER_delay( uint8_t timerNumber, uint8_t overFlows){
 	uint8_t overflowCounter = 0;
 	switch (timerNumber){
 		case TIMER_0:
@@ -213,5 +237,8 @@ void TIMER_delay( uint8_t timerNumber, uint8_t overFlows){
 			overflowCounter ++;							//increment no of overflows
 		}
 		break;
+		default:
+		return ERROR;
 	}
+	return OK;
 }

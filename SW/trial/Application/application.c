@@ -14,17 +14,42 @@ uint8_t mode = NORMAL_MODE;
 uint8_t flag = LOW;
 
 void App_init(void){
-	LED_init(LED_1_PORT,LED_1_PIN);				
-	LED_init(LED_2_PORT,LED_2_PIN);
-	LED_init(LED_3_PORT,LED_3_PIN);
-	LED_init(LED_4_PORT,LED_4_PIN);
-	LED_init(LED_5_PORT,LED_5_PIN);
-	LED_init(LED_6_PORT,LED_6_PIN);
-	LED_TIMER_init();
-	BUTTON_init(BUTTON_1_PORT,BUTTON_1_PIN);
-	BUTTON_INT_init(BUTTON_1_PORT,BUTTON_1_PIN);
-	LED_TIMER_INT_init();
-	LED_TIMER_start();
+	LED_init(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	LED_init(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+	if (LED_init(LED_1_PORT,LED_1_PIN) == ERROR)
+	{
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}				
+	if (LED_init(LED_2_PORT,LED_2_PIN) == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (LED_init(LED_3_PORT,LED_3_PIN) == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (LED_init(LED_4_PORT,LED_4_PIN) == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (LED_init(LED_5_PORT,LED_5_PIN) == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (LED_init(LED_6_PORT,LED_6_PIN) == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (LED_TIMER_init() == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (BUTTON_init(BUTTON_1_PORT,BUTTON_1_PIN) == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (BUTTON_INT_init(BUTTON_1_PORT,BUTTON_1_PIN) == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (LED_TIMER_INT_init() == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
+	if (LED_TIMER_start() == ERROR){
+		LED_on(LED_INIT_ERROR_PORT, LED_INIT_ERROR_PIN);
+	}
 }
 
 void App_start(void){
@@ -34,30 +59,69 @@ void App_start(void){
 		switch (led_number)
 		{
 			case 1:
-			LED_off(LED_2_PORT,LED_2_PIN);
-			LED_off(LED_3_PORT,LED_3_PIN);
-			LED_off(LED_4_PORT,LED_4_PIN);
-			LED_off(LED_5_PORT,LED_5_PIN);
-			LED_on(LED_1_PORT,LED_1_PIN);
-			LED_on(LED_6_PORT,LED_6_PIN);
+			if (LED_off(LED_2_PORT,LED_2_PIN) == ERROR)
+			{
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_3_PORT,LED_3_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_4_PORT,LED_4_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_5_PORT,LED_5_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_on(LED_1_PORT,LED_1_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_on(LED_6_PORT,LED_6_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			flag = HIGH;
 			break;
 			case 2:
-			LED_off(LED_1_PORT,LED_1_PIN);
-			LED_off(LED_3_PORT,LED_3_PIN);
-			LED_off(LED_4_PORT,LED_4_PIN);
-			LED_off(LED_6_PORT,LED_6_PIN);
-			LED_toggle(LED_2_PORT,LED_2_PIN);
-			LED_toggle(LED_5_PORT,LED_5_PIN);
-			LED_TIMER_delay();
+			if (LED_off(LED_1_PORT,LED_1_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_3_PORT,LED_3_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_4_PORT,LED_4_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_6_PORT,LED_6_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_toggle(LED_2_PORT,LED_2_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_toggle(LED_5_PORT,LED_5_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_TIMER_delay() == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			break;
 			case 3:
-			LED_off(LED_1_PORT,LED_1_PIN);
-			LED_off(LED_2_PORT,LED_2_PIN);
-			LED_off(LED_5_PORT,LED_5_PIN);
-			LED_off(LED_6_PORT,LED_6_PIN);
-			LED_on(LED_3_PORT,LED_3_PIN);
-			LED_on(LED_4_PORT,LED_4_PIN);
+			if (LED_off(LED_1_PORT,LED_1_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_2_PORT,LED_2_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_5_PORT,LED_5_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_6_PORT,LED_6_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_on(LED_3_PORT,LED_3_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_on(LED_4_PORT,LED_4_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			flag = LOW;
 			break;
 		}
@@ -69,26 +133,54 @@ void App_start(void){
 			mode = NORMAL_MODE;
 			break;
 			case 2:
-			LED_off(LED_1_PORT,LED_1_PIN);
-			LED_off(LED_3_PORT,LED_3_PIN);
-			LED_off(LED_6_PORT,LED_6_PIN);
-			LED_toggle(LED_2_PORT,LED_2_PIN);
-			LED_toggle(LED_5_PORT,LED_5_PIN);
+			if (LED_off(LED_1_PORT,LED_1_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_3_PORT,LED_3_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_6_PORT,LED_6_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_toggle(LED_2_PORT,LED_2_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_toggle(LED_5_PORT,LED_5_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			if (flag == LOW){
-				LED_on(LED_4_PORT,LED_4_PIN);
+				if (LED_on(LED_4_PORT,LED_4_PIN) == ERROR){
+					LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+				}
 			}
 			else if (flag == HIGH){
-				LED_off(LED_4_PORT,LED_4_PIN);
+				if (LED_off(LED_4_PORT,LED_4_PIN) == ERROR){
+					LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+				}
 			}
-			LED_TIMER_delay();
+			if (LED_TIMER_delay() == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			break;
 			case 3:
-			LED_off(LED_1_PORT,LED_1_PIN);
-			LED_off(LED_2_PORT,LED_2_PIN);
-			LED_off(LED_5_PORT,LED_5_PIN);
-			LED_off(LED_6_PORT,LED_6_PIN);
-			LED_on(LED_3_PORT,LED_3_PIN);
-			LED_on(LED_4_PORT,LED_4_PIN);
+			if (LED_off(LED_1_PORT,LED_1_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_2_PORT,LED_2_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_5_PORT,LED_5_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_off(LED_6_PORT,LED_6_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_on(LED_3_PORT,LED_3_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
+			if (LED_on(LED_4_PORT,LED_4_PIN) == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			flag = LOW;
 			break;
 		}
@@ -105,16 +197,24 @@ ISR(EXT_INT_0){
 		mode = PEDESTRIAN_MODE;
 		if (led_number == 3 || led_number == 2)
 		{
-			LED_TIMER_stop();
+			if (LED_TIMER_stop() == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			overflowCounter = 0;
-			LED_TIMER_start();
+			if (LED_TIMER_start() == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 		}
 		else if (led_number == 1)
 		{
 			led_number = 2;
-			LED_TIMER_stop();
+			if (LED_TIMER_stop() == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 			overflowCounter = 0;
-			LED_TIMER_start();
+			if (LED_TIMER_start() == ERROR){
+				LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+			}
 		}
 	}
 }
@@ -140,5 +240,7 @@ ISR(TIMER_0_INT){
 	else{
 		overflowCounter++;
 	}
-	LED_TIMER_start();
+	if (LED_TIMER_start() == ERROR){
+		LED_on(LED_RUN_ERROR_PORT, LED_RUN_ERROR_PIN);
+	}
 }
